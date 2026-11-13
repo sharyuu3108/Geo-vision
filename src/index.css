@@ -1,0 +1,108 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-navy-950 text-white;
+    font-family: 'Inter', system-ui, sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Scrollbar */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-navy-900;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-navy-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-isro-blue;
+  }
+}
+
+@layer components {
+  .panel {
+    @apply bg-navy-800 border border-white/[0.07] rounded-sm shadow-panel;
+  }
+
+  .panel-header {
+    @apply px-5 py-3.5 border-b border-white/[0.07] flex items-center gap-3;
+  }
+
+  .panel-header-label {
+    @apply text-[10px] font-semibold tracking-[0.15em] uppercase text-isro-text;
+  }
+
+  .btn-primary {
+    @apply bg-isro-blue hover:bg-blue-500 active:bg-blue-700 text-white font-semibold
+           px-6 py-2.5 rounded-sm transition-all duration-150 shadow-btn
+           disabled:opacity-40 disabled:cursor-not-allowed disabled:shadow-none
+           flex items-center gap-2 text-sm;
+  }
+
+  .btn-secondary {
+    @apply bg-transparent hover:bg-white/5 active:bg-white/10 text-isro-text hover:text-white
+           border border-white/[0.12] hover:border-white/25
+           font-medium px-4 py-2 rounded-sm transition-all duration-150
+           flex items-center gap-2 text-sm;
+  }
+
+  .status-badge {
+    @apply inline-flex items-center gap-1.5 text-[11px] font-medium px-2 py-0.5 rounded-sm;
+  }
+
+  .status-pending  { @apply status-badge bg-white/5 text-isro-text; }
+  .status-processing { @apply status-badge bg-isro-blue/15 text-isro-sky; }
+  .status-completed  { @apply status-badge bg-emerald-500/10 text-emerald-400; }
+  .status-failed     { @apply status-badge bg-red-500/10 text-red-400; }
+
+  .section-divider {
+    @apply border-t border-white/[0.06] my-8;
+  }
+
+  .label-tag {
+    @apply text-[10px] font-semibold tracking-[0.14em] uppercase text-isro-sky/70;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+/* Drop zone drag-over highlight */
+.dropzone-active {
+  border-color: #1677D2 !important;
+  background-color: rgba(22, 119, 210, 0.06) !important;
+}
+
+/* Processing animation bar */
+@keyframes progress-bar {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(400%); }
+}
+
+.progress-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.18), transparent);
+  animation: progress-bar 1.6s ease-in-out infinite;
+}
